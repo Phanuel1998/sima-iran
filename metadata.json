@@ -1,0 +1,10 @@
+{
+  "name": "Field Sales Route & Visit Tracker",
+  "description": "Mobile-first PWA for field sales reps to track routes, log shop visits with GPS, manage offline sync, and analyze sales metrics.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,38 @@
+# ==============================================================================
+# پیکربندی وب‌سرور آپاچی و لایت‌اسپید برای سامانه مدیریت ویزیت فروشگاهی
+# Apache / cPanel / LiteSpeed .htaccess Configuration
+# ==============================================================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # فعال‌سازی هدرهای CORS برای درخواست‌های API
+  <IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  </IfModule>
+
+  # اگر فایل یا پوشه حقیقی وجود دارد، مستقیماً تحویل داده شود
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # در غیر این صورت تمام درخواست‌ها به index.php هدایت گردند
+  RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+# جلوگیری از دانلود مستقیم فایل دیتابیس SQLite جهت امنیت
+<Files "field_sales.db">
+  Order allow,deny
+  Deny from all
+</Files>
+
+# تنظیم نوع فایل‌های وب‌فونت و اسکریپت
+<IfModule mod_mime.c>
+  AddType application/javascript .js
+  AddType text/css .css
+  AddType font/woff2 .woff2
+  AddType font/woff .woff
+</IfModule>

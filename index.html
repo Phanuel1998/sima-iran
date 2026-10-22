@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#0f172a" />
+    <title>سامانه ثبت و مدیریت ویزیت فروشگاهی (تهران و ایران)</title>
+    <meta name="description" content="سامانه فروش میدانی و ثبت ویزیت فروشگاه‌ها با GPS، نقشه زنده، خروجی اکسل راست‌به‌چپ و کارکرد آفلاین در ایران." />
+    <meta property="og:title" content="سامانه ثبت و مدیریت ویزیت فروشگاهی (تهران و ایران)" />
+    <meta property="og:description" content="سامانه فروش میدانی و ثبت ویزیت فروشگاه‌ها با GPS، نقشه زنده، خروجی اکسل راست‌به‌چپ و کارکرد آفلاین در ایران." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="manifest" href="/manifest.json" />
+    <script>
+      (function() {
+        if (typeof window !== 'undefined' && window.WebSocket) {
+          var RealWebSocket = window.WebSocket;
+          window.WebSocket = function(url, protocols) {
+            if (typeof url === 'string' && (protocols === 'vite-hmr' || protocols === 'vite-ping' || url.includes('/@vite-hmr') || url.includes('token='))) {
+              var listeners = {};
+              return {
+                CONNECTING: 0,
+                OPEN: 1,
+                CLOSING: 2,
+                CLOSED: 3,
+                readyState: 1,
+                url: url,
+                protocol: protocols || '',
+                send: function() {},
+                close: function() {},
+                addEventListener: function(event, fn) {
+                  listeners[event] = listeners[event] || [];
+                  listeners[event].push(fn);
+                  if (event === 'open') {
+                    setTimeout(function() { fn({ type: 'open' }); }, 5);
+                  }
+                },
+                removeEventListener: function(event, fn) {
+                  if (listeners[event]) {
+                    listeners[event] = listeners[event].filter(function(f) { return f !== fn; });
+                  }
+                },
+                dispatchEvent: function() { return true; }
+              };
+            }
+            return new RealWebSocket(url, protocols);
+          };
+          window.WebSocket.prototype = RealWebSocket.prototype;
+          window.WebSocket.CONNECTING = 0;
+          window.WebSocket.OPEN = 1;
+          window.WebSocket.CLOSING = 2;
+          window.WebSocket.CLOSED = 3;
+        }
+
+        window.addEventListener('unhandledrejection', function(event) {
+          if (event.reason && (
+            String(event.reason).includes('WebSocket') ||
+            String(event.reason?.message).includes('WebSocket') ||
+            String(event.reason?.stack).includes('@vite/client') ||
+            String(event.reason?.stack).includes('createWebSocketModuleRunnerTransport')
+          )) {
+            event.preventDefault();
+          }
+        });
+        window.addEventListener('error', function(event) {
+          if (
+            String(event.message).includes('WebSocket') ||
+            String(event.filename).includes('@vite/client')
+          ) {
+            event.preventDefault();
+          }
+        });
+      })();
+    </script>
+  </head>
+  <body class="bg-slate-900 text-slate-100 overflow-hidden select-none">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
